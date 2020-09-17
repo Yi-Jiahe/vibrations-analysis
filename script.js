@@ -1,7 +1,6 @@
 import * as math from 'mathjs';
 
 const frequencies = [17.376272432753073, 39.11760068339389, 63.250555880976044, 78.30410208176147, 136.09626489254052];
-
 const modeshapes = 
 	[[0.028385571503446397, -0.049982173081463646, 0.07822616568264114, -0.007166412583523741, 0.9962196945812942],
 	 [0.25126552313780465, -0.4123184658595355, 0.5505042882226907, -0.0429407912094344, -0.08641682244730707],
@@ -24,7 +23,7 @@ function calculate_path_d(points){
 // Set up SVG display element
 const targetDiv = document.getElementById('svg-target');
 const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svgNode.setAttributeNS(null, 'viewBox', `0 0 ${targetDiv.clientWidth} 100`);
+svgNode.style.width = '100%';
 targetDiv.appendChild(svgNode);
 
 // Create SVGs for the masses
@@ -45,7 +44,7 @@ for (var i = 0; i < 5; i++){
 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 path.setAttributeNS(null, 'd', calculate_path_d(xPositions.map(function(e, i) {return [e*xScale, 50-initial_displacements[i]*yScale]})));
 path.setAttributeNS(null, "stroke", "black"); 
-path.setAttributeNS(null, "stroke-width", 3);  
+path.setAttributeNS(null, "stroke-width", 7);  
 path.setAttributeNS(null, "opacity", 1);  
 path.setAttributeNS(null, "fill", "none");
 svgNode.appendChild(path);
@@ -65,12 +64,9 @@ submitButton.disabled = false;
 document.getElementById('initial_displacements').addEventListener('submit', function(e) {
 	e.preventDefault(); //to prevent form submission
 	play_animation = false;
-	initial_displacements = 
-	[document.getElementById('y0_1').value,
-	 document.getElementById('y0_2').value,
-	 document.getElementById('y0_3').value,
-	 document.getElementById('y0_4').value,
-	 document.getElementById('y0_5').value];
+	for (var i=0; i < 5; i++){
+		initial_displacements[i] = document.getElementsByClassName('y0_input')[i].value;
+	}
 	set_mass_displacements(initial_displacements);
 	constants = solve_for_constants(initial_displacements);
 });
@@ -100,9 +96,9 @@ animation_button.addEventListener('click', function() {
 	}
 });
 
-// Assume zero initial velocity => alphas are pi/2
-function solve_for_constants(initial_displacments){
-	return math.multiply(math.inv(modeshapes), initial_displacments);
+function solve_for_constants(initial_displacements){
+	// Assume zero initial velocity => alphas are pi/2
+	return math.multiply(math.inv(modeshapes), initial_displacements);
 }
 
 // let constants = solve_for_constants([-0.049982173081463646, -0.4123184658595355, -0.3103700521634221, 0.45757493372587194, 0.7223509367552119])
@@ -131,5 +127,3 @@ const animate = () => {
 	}
 	window.requestAnimationFrame(animateStep);
 };
-
-animate();
