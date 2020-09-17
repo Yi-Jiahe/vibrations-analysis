@@ -86,7 +86,7 @@ function solve_for_constants(initial_displacments){
 function y(t){
 	let modeAmplitudes = []
 	for (var i = 0; i < 5; i++){
-		modeAmplitudes.push(constants[i] * math.sin(frequencies[i]*t))
+		modeAmplitudes.push(constants[i] * math.cos(frequencies[i]*t))
 	}
 	return math.multiply(modeshapes, modeAmplitudes);
 }
