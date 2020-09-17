@@ -13,9 +13,9 @@ var xScale = 10;
 var yScale = 10;
 
 function calculate_path_d(points){
-	var d = `M ${points[0][0]},${points[0][1]}`;
-	d += ` Q ${(points[1][0]+points[0][0])/2},${(points[0][1]+points[0][1])/2} ${points[1][0]},${points[1][1]}`;	
-	for (var i = 2; i < points.length; i++){
+	var d = 'M 0,50';
+	d += ` Q ${points[0][0]/2},${(points[0][1]+50)/2} ${points[0][0]},${points[0][1]}`;	
+	for (var i = 1; i < points.length; i++){
 		d += ` T ${points[i][0]},${points[i][1]}`;
 	}
 	return d;
@@ -84,11 +84,13 @@ animation_button.addEventListener('click', function() {
 			animate();
 			buttonState = 'stop';
 			animation_button.innerText = 'Stop Animation';
+			submitButton.disabled = true;
 			break;
 		case 'stop':
 			play_animation = false;
 			buttonState = 'reset';
 			animation_button.innerText = 'Reset Animation';
+			submitButton.disabled = false;
 			break;
 		case 'reset':
 			set_mass_displacements(initial_displacements);
