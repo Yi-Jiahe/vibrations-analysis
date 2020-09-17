@@ -30,13 +30,10 @@ function solve_for_constants(initial_displacments){
 // let constants = solve_for_constants([-0.049982173081463646, -0.4123184658595355, -0.3103700521634221, 0.45757493372587194, 0.7223509367552119])
 
 function y(t){
-	const frequencies_scaled = math.multiply(0.1, frequencies);
-	let modeAmplitudes =
-	[constants[0] * math.sin(frequencies_scaled[0]*t),
-	 constants[1] * math.sin(frequencies_scaled[1]*t),
-	 constants[2] * math.sin(frequencies_scaled[2]*t),
-	 constants[3] * math.sin(frequencies_scaled[3]*t),
-	 constants[4] * math.sin(frequencies_scaled[4]*t)];
+	let modeAmplitudes = []
+	for (var i = 0; i < 5; i++){
+		modeAmplitudes.push(constants[i] * math.sin(frequencies[i]*t))
+	}
 	return math.multiply(modeshapes, modeAmplitudes);
 }
 
@@ -61,13 +58,14 @@ for (var i = 0; i < 5; i++){
 	svgMasses.push(circleNode);
 }
 
+var speed = 0.1;
 const animate = () => {
 	let startTime = 0;
 	const animateStep = (timestamp) => {
 		if (!startTime) startTime = timestamp;
 		// progress goes from 0 to 1 over 1s
 		const t = (timestamp - startTime);
-		const yPositions = y((timestamp - startTime)/1000);
+		const yPositions = y((timestamp - startTime)/(1000/speed));
 		// console.log(yPositions);
 		for (var i = 0; i < 5; i++){
 			svgMasses[i].setAttributeNS(null, 'cy', 50 + yPositions[i]*10);
