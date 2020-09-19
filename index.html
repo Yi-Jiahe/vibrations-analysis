@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>5-DoF Lumped mass vibrational wing model</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>5-DoF Lumped mass vibrational wing model</h1>
-    <div>
-      <div id="svg-target"></div>
-      <form id="initial_displacements">
-        <label for="y0_1">y<sub>1</sub>(0)</label>
-        <input type="text" id="y0_1" class="y0_input" value=0.0><br>
-        <label for="y0_2">y<sub>2</sub>(0)</label>
-        <input type="text" id="y0_2" class="y0_input" value=0.0><br>
-        <label for="y0_3">y<sub>3</sub>(0)</label>
-        <input type="text" id="y0_3" class="y0_input" value=0.0><br>
-        <label for="y0_4">y<sub>4</sub>(0)</label>
-        <input type="text" id="y0_4" class="y0_input" value=0.0><br>
-        <label for="y0_5">y<sub>5</sub>(0)</label>
-        <input type="text" id="y0_5" class="y0_input" value=0.0><br>
-        <label for="speed">Time Scale</label>
-        <p>
-          0
-          <input type="range" min="0" max="100" value="50" id="speed">
-          1
-        </p>
-        <input id="submit" type="submit" value="submit" disabled=true>
-        <!-- <input type="reset" value="reset"> -->
-      </form>
-      <button id='animation_control'>Start Animation</button>
-    </div>
 
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>5-DoF Lumped mass vibrational wing model</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <h1>5-DoF Lumped mass vibrational wing model</h1>
+  <div id="svg-target"></div>
+  <form id="initial_displacements">
+    <label for="y0_1">y<sub>1</sub>(0)</label>
+    <input type="text" id="y0_1" class="y0_input" value=0.0><br>
+    <label for="y0_2">y<sub>2</sub>(0)</label>
+    <input type="text" id="y0_2" class="y0_input" value=0.0><br>
+    <label for="y0_3">y<sub>3</sub>(0)</label>
+    <input type="text" id="y0_3" class="y0_input" value=0.0><br>
+    <label for="y0_4">y<sub>4</sub>(0)</label>
+    <input type="text" id="y0_4" class="y0_input" value=0.0><br>
+    <label for="y0_5">y<sub>5</sub>(0)</label>
+    <input type="text" id="y0_5" class="y0_input" value=0.0><br>
+    <label for="speed">Time Scale</label>
+    <p>
+      0
+      <input type="range" min="0" max="100" value="50" id="speed">
+      1
+    </p>
+    <input id="submit" type="submit" value="submit" disabled=true>
+    <!-- <input type="reset" value="reset"> -->
+  </form>
+  <button id='animation_control'>Start Animation</button>
+  <div id="modeshapes"></div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
