@@ -12,7 +12,7 @@ var data = [];
 for (var i=0; i < 5; i++){
 	let modeshape = [];
 	for (var j=0; j < 5; j++){
-		modeshape.push(modeshapes[i][j]);
+		modeshape.push(modeshapes[j][i]);
 	}
 	data.push({
 		x: [1, 2, 3, 4, 5],
